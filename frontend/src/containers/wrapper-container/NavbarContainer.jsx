@@ -41,7 +41,9 @@ const NavbarContainer = () => {
         sx={{ ...navbarStyles.iconButton, color: "#ffffff" }}
         onClick={toggleDrawer(true)}
       >
-        <MenuIcon />
+        <Badge color="error" badgeContent={notificationsCount}>
+          <MenuIcon />
+        </Badge>
       </IconButton>
       <Drawer
         open={drawerOpen}
@@ -63,13 +65,13 @@ const NavbarContainer = () => {
           </ListItem> */}
           <ListItem>
             <Avatar alt="Profile" src="profile.jpg" sx={navbarStyles.logo} />
-            {/* <Typography color="white" style={typographyStyle}> */}
-            {/* {username} &reg; */}
-            {/* </Typography> */}
+            <Typography color="white" sx={navbarStyles.logoText}>
+              martijjx &reg;
+            </Typography>
           </ListItem>
           <ListItem sx={{ ...navbarStyles.listItem, border: "none" }}>
             <Box sx={navbarStyles.box}>
-              <IconButton color="primary" onClick={handleNavigate("/")}>
+              <IconButton color="secondary" onClick={handleNavigate("/")}>
                 <Home />
               </IconButton>
               <Badge
@@ -84,7 +86,10 @@ const NavbarContainer = () => {
               <IconButton color="secondary" onClick={handleNavigate("/about")}>
                 <Info />
               </IconButton>
-              <IconButton color="primary" onClick={handleNavigate("/settings")}>
+              <IconButton
+                color="secondary"
+                onClick={handleNavigate("/settings")}
+              >
                 <Settings />
               </IconButton>
             </Box>

@@ -16,6 +16,10 @@ const navbarStyles = {
     flexDirection: "column",
     marginTop: "50px",
   },
+  logoText: {
+    alignSelf: "flex-end",
+    marginLeft: "5px",
+  },
   box: {
     display: "flex",
     justifyContent: "space-between",

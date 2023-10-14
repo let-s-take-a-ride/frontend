@@ -1,7 +1,8 @@
 import React from "react";
+import { CssBaseline } from "@mui/material";
+
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { CssBaseline } from "@mui/material";
 import { teal, grey } from "@mui/material/colors";
 import NavbarContainer from "./NavbarContainer";
 // import Navbar from "./Navbar";
@@ -31,7 +32,9 @@ const LayoutContainer = ({ children }) => {
           <Box
             display="flex"
             justifyContent="center"
-            alignItems="center"
+            // paddingTop="8vh"
+            alignItems="flex-start"
+            boxSizing="border-box"
             style={{ height: "100%" }}
           >
             {children}
