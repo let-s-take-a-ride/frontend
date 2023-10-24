@@ -11,13 +11,15 @@ import navbarStyles from "./WrapperContainerStyles";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Settings, Info, Home } from "@mui/icons-material";
 import { Typography, Avatar } from "@mui/material";
+import { useAuth0 } from "@auth0/auth0-react";
+
 import { teal } from "@mui/material/colors";
 
 const NavbarContainer = () => {
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [notificationsCount, setNotificationsCount] = useState(5);
-
+  const { logout } = useAuth0();
   const toggleDrawer = (open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -102,7 +104,7 @@ const NavbarContainer = () => {
           </ListItem>
 
           <ListItem
-            onClick={handleNavigate("/login")}
+            onClick={() => logout({ returnTo: window.location.origin })}
             sx={navbarStyles.listItem}
           >
             Logout
