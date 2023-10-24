@@ -38,7 +38,7 @@ const completeLoginHOC = (WrappedComponent) => {
           console.log(response.data);
           if (response.data.is_first_login === true) {
             // Navigate to complete login or do something else
-            navigate("/preferences");
+            navigate("/complete-login");
           } else {
             setPicture(response.data.picture);
           }

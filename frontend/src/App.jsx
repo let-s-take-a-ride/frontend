@@ -2,14 +2,14 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import LayoutContainer from "./containers/wrapper-container/LayoutContainer";
 import { customTheme } from "./styles/themes";
 import { ThemeProvider } from "@mui/material";
+import ProtectedRoute from "./components/ProtectedRoute";
 import DashboardPage from "./containers/dashboard-page/DashboardPage";
 import LoginPage from "./containers/login-page/LoginPage";
 import AboutPage from "./containers/about-page/AboutPage";
 import SettingsPage from "./containers/settings-page/SettingsPage";
 import RidesPage from "./containers/rides-page/RidesPage";
 import NotificationsPage from "./containers/notifications-page/NotificationsPage";
-import { Auth0Provider } from "@auth0/auth0-react";
-import ProtectedRoute from "./components/ProtectedRoute";
+import CompleteLoginPage from "./containers/complete-login-page/CompleteLoginPage";
 
 function App() {
   return (
@@ -58,10 +58,10 @@ function App() {
               }
             />{" "}
             <Route
-              path="/preferences"
+              path="/complete-login"
               element={
                 <ProtectedRoute>
-                  <SettingsPage />
+                  <CompleteLoginPage />
                 </ProtectedRoute>
               }
             ></Route>
