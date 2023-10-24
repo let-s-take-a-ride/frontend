@@ -1,11 +1,25 @@
 import React from "react";
 import Header from "../../components/Header";
-import { Box, TextField, Avatar, Typography, Badge } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Avatar,
+  Typography,
+  Badge,
+  Button,
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import { useDispatch, useSelector } from "react-redux";
+import { AlertContext } from "../../contexts/AlertContext";
+import { useContext } from "react";
 
 const SettingsPage = () => {
+  const user = useSelector((state) => state.user);
+  const { openSnackbar } = useContext(AlertContext);
+
   const handleEditIcon = () => {
     console.log("clicked");
+    openSnackbar("Successfully updated");
   };
   return (
     <>
@@ -20,7 +34,7 @@ const SettingsPage = () => {
       >
         <Header title="settings" />
         <Typography color="white" sx={{ paddingBottom: "2vh" }}>
-          Hi martijjx!
+          Hi {user.username}!
         </Typography>
 
         <Badge
@@ -40,7 +54,7 @@ const SettingsPage = () => {
         >
           <Avatar
             alt="Profile"
-            src="profile.jpg"
+            src={user.picture}
             sx={{
               width: "70px",
               height: "70px",
@@ -48,38 +62,68 @@ const SettingsPage = () => {
               alignItems: "center",
               flexDirection: "column",
               marginTop: "50px",
-              opacity: 0.6, // Dodano właściwość opacity
+              opacity: 0.6,
             }}
           />
         </Badge>
+
         <TextField
-          label="Some config"
+          label="username"
+          variant="outlined"
+          value={user.username}
+          fullWidth
+          margin="normal"
+          color="secondary"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          sx={{
+            flex: 1,
+          }}
+        />
+
+        <TextField
+          variant="outlined"
+          label="email"
+          value={user.email}
+          fullWidth
+          margin="normal"
+          color="secondary"
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        {/* fetch data from backend for the rest */}
+        {/* <TextField
+          label="city"
           variant="outlined"
           fullWidth
           margin="normal"
           color="secondary"
         />
         <TextField
-          label="Some config"
+          label="prefered speed"
           variant="outlined"
           fullWidth
           margin="normal"
           color="secondary"
         />
         <TextField
-          label="Some config"
+          label="prefered distance"
           variant="outlined"
           fullWidth
           margin="normal"
           color="secondary"
-        />
-        <TextField
-          label="Some config"
+        /> */}
+        <Button
+          style={{ marginTop: 15 }}
           variant="outlined"
-          fullWidth
-          margin="normal"
           color="secondary"
-        />
+          fullWidth
+          onClick={() => openSnackbar("Successfully updated")}
+        >
+          Submit
+        </Button>
       </Box>
     </>
   );

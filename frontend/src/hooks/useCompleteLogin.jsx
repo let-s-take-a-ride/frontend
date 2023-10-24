@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getAxiosInstance } from "../services/axiosInstance";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getUserDataFromLocalStorage } from "../services/localStorageService";
 
 const useCompleteLogin = () => {
   const { getAccessTokenSilently, user, isAuthenticated } = useAuth0();
@@ -35,9 +36,11 @@ const useCompleteLogin = () => {
         },
       };
       try {
+        const userData = getUserDataFromLocalStorage();
+        console.log(userData);
         const axiosInstance = await getAxiosInstance(getAccessTokenSilently);
         const response = await axiosInstance.patch(
-          `users/${userId}/`,
+          `users/${userData.id}/`,
           updatedData
         );
         console.log(response);

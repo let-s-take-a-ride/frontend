@@ -1,12 +1,25 @@
 import React, { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Navigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { setUserData } from "../reducer";
+import { clearUserDataFromLocalStorage } from "../services/localStorageService";
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, isLoading } = useAuth0();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
+      clearUserDataFromLocalStorage();
+      dispatch(
+        setUserData({
+          city: "",
+          profile: "",
+          username: "",
+          email: "",
+          donutsEaten: 0,
+        })
+      );
     }
   }, [isLoading, isAuthenticated]);
 
