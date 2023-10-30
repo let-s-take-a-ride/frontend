@@ -11,7 +11,9 @@ import SettingsPage from "./containers/settings-page/SettingsPage";
 import RidesPage from "./containers/rides-page/RidesPage";
 import NotificationsPage from "./containers/notifications-page/NotificationsPage";
 import CompleteLoginPage from "./containers/complete-login-page/CompleteLoginPage";
-
+import EventList from "./containers/rides-page/RidesPage2";
+import EventDetailPage from "./containers/rides-page/EventDetailPage";
+import MyRidesPage from "./containers/myRides-page/MyRidesPage";
 function App() {
   return (
     <>
@@ -44,10 +46,27 @@ function App() {
                 }
               />
               <Route
+                path="/my-rides"
+                element={
+                  <ProtectedRoute>
+                    <MyRidesPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
                 path="/rides"
                 element={
                   <ProtectedRoute>
-                    <RidesPage />
+                    {/* <RidesPage /> */}
+                    <EventList />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/rides/:rideId"
+                element={
+                  <ProtectedRoute>
+                    <EventDetailPage />
                   </ProtectedRoute>
                 }
               />

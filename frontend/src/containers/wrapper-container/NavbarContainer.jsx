@@ -42,7 +42,7 @@ const NavbarContainer = () => {
         edge="start"
         color="inherit"
         aria-label="menu"
-        sx={{ ...navbarStyles.iconButton, color: "#ffffff" }}
+        sx={{ ...navbarStyles.iconButton, color: "#ffffff", zIndex: 1000 }}
         onClick={toggleDrawer(true)}
       >
         <Badge color="error" badgeContent={notificationsCount}>
@@ -59,8 +59,8 @@ const NavbarContainer = () => {
             onClick={handleNavigate("/rides")}
             sx={{
               ...navbarStyles.listItem,
-              border: `2px solid ${teal[500]}`,
-              color: teal[500],
+              // border: `2px solid ${teal[500]}`,
+              // color: teal[500],
               mb: "80px",
               mt: "0px",
             }}
@@ -105,9 +105,14 @@ const NavbarContainer = () => {
             onClick={handleNavigate("/rides")}
             sx={navbarStyles.listItem}
           >
-            Rides{" "}
+            Search Rides{" "}
           </ListItem>
-
+          <ListItem
+            onClick={handleNavigate("/my-rides")}
+            sx={navbarStyles.listItem}
+          >
+            My Rides{" "}
+          </ListItem>
           <ListItem
             onClick={() => logout({ returnTo: window.location.origin })}
             sx={navbarStyles.listItem}
