@@ -70,7 +70,7 @@ const SettingsPage = () => {
         <TextField
           label="username"
           variant="outlined"
-          value={user.username}
+          defaultValue={user.username}
           fullWidth
           margin="normal"
           color="secondary"
@@ -85,7 +85,7 @@ const SettingsPage = () => {
         <TextField
           variant="outlined"
           label="email"
-          value={user.email}
+          defaultValue={user.email}
           fullWidth
           margin="normal"
           color="secondary"

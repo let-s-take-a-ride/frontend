@@ -8,12 +8,13 @@ import DashboardPage from "./containers/dashboard-page/DashboardPage";
 import LoginPage from "./containers/login-page/LoginPage";
 import AboutPage from "./containers/about-page/AboutPage";
 import SettingsPage from "./containers/settings-page/SettingsPage";
-import RidesPage from "./containers/rides-page/RidesPage";
 import NotificationsPage from "./containers/notifications-page/NotificationsPage";
 import CompleteLoginPage from "./containers/complete-login-page/CompleteLoginPage";
 import EventList from "./containers/rides-page/RidesPage2";
 import EventDetailPage from "./containers/rides-page/EventDetailPage";
 import MyRidesPage from "./containers/myRides-page/MyRidesPage";
+import CreateRidePage from "./containers/createRide-page/CreateRidePage";
+
 function App() {
   return (
     <>
@@ -50,6 +51,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <MyRidesPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/create-ride"
+                element={
+                  <ProtectedRoute>
+                    <CreateRidePage />
                   </ProtectedRoute>
                 }
               />

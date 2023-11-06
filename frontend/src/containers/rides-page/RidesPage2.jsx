@@ -11,15 +11,19 @@ import {
 } from "@mui/material";
 import PeopleIcon from "@mui/icons-material/People";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import { useNavigate } from "react-router-dom";
 
 import EventListHeader from "./EventListHeader";
 import Header from "../../components/Header";
 const EventList = () => {
+  const navigate = useNavigate();
+
   const { events, loading, error, setOrder, setSearchQuery } = useEvents();
   const handleCreate = () => {
-    // Tutaj można umieścić logikę obsługi tworzenia nowego eventu
     console.log("Create event button clicked");
+    navigate("/create-ride");
   };
+
   if (loading) return <CircularProgress />;
   if (error)
     return <Typography color="error">Error: {error.message}</Typography>;
