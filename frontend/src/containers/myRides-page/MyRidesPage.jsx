@@ -11,19 +11,35 @@ import {
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import PeopleIcon from "@mui/icons-material/People";
 import { Link } from "react-router-dom";
-
+import CustomSnackbar from "../../components/CustomSnackbar";
 import useRides from "../../hooks/useChoosenEvents";
 import Header from "../../components/Header";
+import CustomLoader from "../../components/CustomLoader";
 
 const MyRidesPage = () => {
   const [rideView, setRideView] = useState("attending");
   const { rides, loading, error } = useRides(rideView);
+  const [open, setOpen] = useState(true);
 
   const handleRideViewChange = (event, newRideView) => {
     if (newRideView !== null) {
       setRideView(newRideView);
     }
   };
+
+  const handleClose = () => {
+    setOpen(false);
+    window.location.reload();
+  };
+  if (loading) return <CustomLoader />;
+  if (error)
+    return (
+      <CustomSnackbar
+        open={open}
+        message={"Stop clicking so fast, wait a sec and refresh :("}
+        onClose={handleClose}
+      />
+    );
 
   return (
     <>
@@ -42,6 +58,7 @@ const MyRidesPage = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            width: "100%",
             mb: 2,
           }}
         >
@@ -81,7 +98,7 @@ const MyRidesPage = () => {
                       elevation={3}
                       sx={{
                         width: "100%",
-                        minWidth: "250px",
+                        minWidth: "300px",
                         borderRadius: "5px",
                         position: "relative",
                         mb: 2,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useEvents from "../../hooks/useEvents";
 import {
   List,
@@ -12,21 +12,34 @@ import {
 import PeopleIcon from "@mui/icons-material/People";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import { useNavigate } from "react-router-dom";
-
+import CustomSnackbar from "../../components/CustomSnackbar";
 import EventListHeader from "./EventListHeader";
+import CustomLoader from "../../components/CustomLoader";
 import Header from "../../components/Header";
 const EventList = () => {
   const navigate = useNavigate();
 
   const { events, loading, error, setOrder, setSearchQuery } = useEvents();
+  const [open, setOpen] = useState(true);
   const handleCreate = () => {
     console.log("Create event button clicked");
     navigate("/create-ride");
   };
 
-  if (loading) return <CircularProgress />;
-  if (error)
-    return <Typography color="error">Error: {error.message}</Typography>;
+  const handleClose = () => {
+    setOpen(false);
+    window.location.reload();
+  };
+  if (loading) return <CustomLoader />;
+  if (error) {
+    return (
+      <CustomSnackbar
+        open={open}
+        message={"Stop clicking so fast, wait a sec and refresh :("}
+        onClose={handleClose}
+      />
+    );
+  }
 
   return (
     <>

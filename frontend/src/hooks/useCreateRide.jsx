@@ -2,7 +2,7 @@ import { useState } from "react";
 import { getAxiosInstance } from "../services/axiosInstance";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getUserDataFromLocalStorage } from "../services/localStorageService";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const useCreateRide = () => {
   const { getAccessTokenSilently } = useAuth0();

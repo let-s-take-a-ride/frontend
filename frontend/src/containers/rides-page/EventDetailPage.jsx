@@ -12,7 +12,8 @@ import CustomSnackbar from "../../components/CustomSnackbar";
 const EventDetailPage = () => {
   const { rideId } = useParams(); // Get the ride ID from the route parameters
   const [eventDetails, setEventDetails] = useState(null);
-  const [isUserAMember, setIsUserAMember] = useState(false); // new state
+  const [isUserAMember, setIsUserAMember] = useState(false);
+  const [isOwner, setIsOwner] = useState(false);
   const [open, setOpen] = useState(false);
   const [response, setResponse] = useState("");
   const { id } = useSelector((state) => state.user);
@@ -31,10 +32,14 @@ const EventDetailPage = () => {
           (membership) => membership.user
         );
 
+        console.log(response.data);
+        setIsOwner(response.data.owner === id);
         console.log(memberUserIds + " mem user ids");
         console.log(id + " user");
 
-        setIsUserAMember(memberUserIds.includes(parseInt(id))); // Assuming user.sub is a string representation of the user's ID
+        console.log(response.data.owner === id);
+
+        setIsUserAMember(memberUserIds.includes(parseInt(id)));
       } catch (error) {
         console.error("Failed to fetch event details:", error);
       }
@@ -182,10 +187,33 @@ const EventDetailPage = () => {
                 </Typography>
               </Box>
             </Paper>
-            {isUserAMember ? (
+            {/* {isUserAMember ? (
               <Button onClick={handleResign}>Resign</Button>
             ) : (
               <Button onClick={handleAttend}>Attend</Button>
+            )} */}
+            <Box pt={4}> </Box>
+            {isUserAMember && !isOwner && (
+              <Button
+                variant="outlined"
+                color="secondary"
+                fullWidth
+                size="small"
+                onClick={handleResign}
+              >
+                Resign
+              </Button>
+            )}
+            {!isUserAMember && !isOwner && (
+              <Button
+                variant="outlined"
+                color="secondary"
+                fullWidth
+                size="small"
+                onClick={handleAttend}
+              >
+                Attend
+              </Button>
             )}
           </>
         ) : (

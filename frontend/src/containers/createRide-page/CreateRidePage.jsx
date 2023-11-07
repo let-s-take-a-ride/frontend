@@ -29,7 +29,6 @@ const CreateRidePage = () => {
     setResponse,
   } = useCreateRide();
 
-
   const handleClose = () => {
     setResponse("");
     setOpen(false);
@@ -147,8 +146,10 @@ const CreateRidePage = () => {
           <Grid item xs={6}>
             <InputLabel htmlFor="photo">
               <Button
-                variant="contained"
-                color="primary"
+                // variant="contained"
+                variant={selectedJpgFile ? "outlined" : "contained"}
+                // color="primary"
+                color={selectedJpgFile ? "tertiary" : "primary"}
                 component="label"
                 fullWidth
                 startIcon={
@@ -189,8 +190,10 @@ const CreateRidePage = () => {
           <Grid item xs={6}>
             <InputLabel htmlFor="gpx_track">
               <Button
-                variant="contained"
-                color="primary"
+                // variant="contained"
+                variant={selectedGpxFile ? "outlined" : "contained"}
+                // color="primary"
+                color={selectedGpxFile ? "secondary" : "primary"}
                 component="label"
                 fullWidth
                 startIcon={
@@ -233,8 +236,8 @@ const CreateRidePage = () => {
         <Button
           type="button"
           sx={{ mt: 4 }}
-          variant="contained"
-          color="primary"
+          variant="outlined"
+          color="secondary"
           fullWidth
           onClick={handleSubmit}
         >
