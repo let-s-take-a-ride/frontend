@@ -28,6 +28,9 @@ export const customTheme = createTheme({
       main: "#555555",
       dark: "#555555",
     },
+    // text: {
+    //   primary: "#ffffff", // white color
+    // },
   },
   components: {
     MuiPaper: {
@@ -51,6 +54,34 @@ export const customTheme = createTheme({
         root: {
           ".MuiSlider-track": {
             backgroundColor: darkPalette.hexary,
+          },
+        },
+      },
+    },
+    MuiToggleButtonGroup: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "transparent",
+        },
+      },
+    },
+    MuiToggleButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: "20px", // Adjust according to your preference
+          textTransform: "none",
+          color: "white",
+          "&.Mui-selected": {
+            backgroundColor: "white",
+            color: "yourDesiredColorForSelectedState",
+            "&:hover": {
+              backgroundColor: "white",
+              color: "yourDesiredColorForHoverState",
+            },
+          },
+          "&:hover": {
+            backgroundColor: "white",
+            color: "yourDesiredColorForHoverState",
           },
         },
       },

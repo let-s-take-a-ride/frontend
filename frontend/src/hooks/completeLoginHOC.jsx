@@ -3,9 +3,13 @@ import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { saveUserDataToLocalStorage } from "../services/localStorageService";
+import { useDispatch } from "react-redux";
+import { setUserData } from "../reducer";
 
 const completeLoginHOC = (WrappedComponent) => {
   return (props) => {
+    const dispatch = useDispatch();
     const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
     const domain = import.meta.env.VITE_DOMAIN;
     const [picture, setPicture] = useState("");
@@ -36,6 +40,11 @@ const completeLoginHOC = (WrappedComponent) => {
             }
           );
           console.log(response.data);
+          saveUserDataToLocalStorage(response.data, "is_first_login");
+          if (response.data) {
+            dispatch(setUserData(response.data));
+          }
+
           if (response.data.is_first_login === true) {
             // Navigate to complete login or do something else
             navigate("/complete-login");

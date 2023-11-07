@@ -12,14 +12,16 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Settings, Info, Home } from "@mui/icons-material";
 import { Typography, Avatar } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
-
-import { teal } from "@mui/material/colors";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserDataFromLocalStorage } from "../../services/localStorageService";
 
 const NavbarContainer = () => {
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [notificationsCount, setNotificationsCount] = useState(5);
   const { logout } = useAuth0();
+  const user = useSelector((state) => state.user);
+
   const toggleDrawer = (open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -40,7 +42,7 @@ const NavbarContainer = () => {
         edge="start"
         color="inherit"
         aria-label="menu"
-        sx={{ ...navbarStyles.iconButton, color: "#ffffff" }}
+        sx={{ ...navbarStyles.iconButton, color: "#ffffff", zIndex: 1000 }}
         onClick={toggleDrawer(true)}
       >
         <Badge color="error" badgeContent={notificationsCount}>
@@ -57,20 +59,23 @@ const NavbarContainer = () => {
             onClick={handleNavigate("/rides")}
             sx={{
               ...navbarStyles.listItem,
-              border: `2px solid ${teal[500]}`,
-              color: teal[500],
+              // border: `2px solid ${teal[500]}`,
+              // color: teal[500],
               mb: "80px",
               mt: "0px",
             }}
           >
             Let's take a ride!
           </ListItem> */}
-          <ListItem>
-            <Avatar alt="Profile" src="profile.jpg" sx={navbarStyles.logo} />
-            <Typography color="white" sx={navbarStyles.logoText}>
-              martijjx &reg;
-            </Typography>
-          </ListItem>
+          {user.username && (
+            <ListItem>
+              <Avatar alt="Profile" src={user.picture} sx={navbarStyles.logo} />
+              <Typography color="white" sx={navbarStyles.logoText}>
+                {user.username} &reg;
+              </Typography>
+            </ListItem>
+          )}
+
           <ListItem sx={{ ...navbarStyles.listItem, border: "none" }}>
             <Box sx={navbarStyles.box}>
               <IconButton color="secondary" onClick={handleNavigate("/")}>
@@ -100,9 +105,14 @@ const NavbarContainer = () => {
             onClick={handleNavigate("/rides")}
             sx={navbarStyles.listItem}
           >
-            Rides{" "}
+            Search Rides{" "}
           </ListItem>
-
+          <ListItem
+            onClick={handleNavigate("/my-rides")}
+            sx={navbarStyles.listItem}
+          >
+            My Rides{" "}
+          </ListItem>
           <ListItem
             onClick={() => logout({ returnTo: window.location.origin })}
             sx={navbarStyles.listItem}
