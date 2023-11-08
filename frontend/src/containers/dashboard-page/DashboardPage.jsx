@@ -12,8 +12,9 @@ const DashboardPage = ({ picture, isLoading }) => {
   return (
     <div style={{ color: "white" }}>
       <Typography color="white" sx={{ paddingTop: "2vh" }}>
-        Hi {username}! <div>wanna try some ride?</div>
+        Hi {username}!
       </Typography>{" "}
+      <div>wanna try some ride?</div>
       <img src={picture} alt={"testo"} />
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Drawer from "@mui/material/Drawer";
 import Badge from "@mui/material/Badge";
@@ -14,13 +14,19 @@ import { Typography, Avatar } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDataFromLocalStorage } from "../../services/localStorageService";
-
+import useNotificationsCounter from "../../hooks/useNotificationsCounter";
 const NavbarContainer = () => {
   const navigate = useNavigate();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [notificationsCount, setNotificationsCount] = useState(5);
-  const { logout } = useAuth0();
+  const { logout, isAuthenticated, isLoading } = useAuth0();
   const user = useSelector((state) => state.user);
+  const notificationCount = useNotificationsCounter();
+
+  useEffect(() => {
+    console.log("co jest");
+    setNotificationsCount(notificationCount);
+  }, [notificationCount]);
 
   const toggleDrawer = (open) => (event) => {
     if (
