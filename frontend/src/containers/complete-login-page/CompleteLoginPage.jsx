@@ -65,7 +65,7 @@ const CompleteLoginPage = () => {
         />
         <Button
           style={{ marginTop: 15 }}
-          variant="constained"
+          variant="outlined"
           color="secondary"
           fullWidth
           onClick={handleSubmit}

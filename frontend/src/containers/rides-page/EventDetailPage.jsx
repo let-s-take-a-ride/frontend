@@ -3,14 +3,14 @@ import { useParams } from "react-router-dom";
 import { getAxiosInstance } from "../../services/axiosInstance";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button, Paper, Box } from "@mui/material";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { Typography, Avatar } from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import PeopleIcon from "@mui/icons-material/People";
 import Header from "../../components/Header";
 import CustomSnackbar from "../../components/CustomSnackbar";
 const EventDetailPage = () => {
-  const { rideId } = useParams(); 
+  const { rideId } = useParams();
   const [eventDetails, setEventDetails] = useState(null);
   const [isUserAMember, setIsUserAMember] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
@@ -23,7 +23,6 @@ const EventDetailPage = () => {
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        // Assuming you're using the getAxiosInstance and getAccessTokenSilently like in your given code
         const axiosInstance = await getAxiosInstance(getAccessTokenSilently);
         const response = await axiosInstance.get(`events/${rideId}`);
         setEventDetails(response.data);

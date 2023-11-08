@@ -18,15 +18,11 @@ const useNotificationsCounter = () => {
       console.log(event);
       const message = JSON.parse(event.data);
       console.log(message);
-
-      //   if (message.type === "notification") {
-      // setNotificationCount((prevCount) => prevCount + 1);
       dispatch(incrementDonutsEaten());
-
-      //   }
     };
 
     socket.onmessage = (event) => {
+      console.log("przyszla message");
       handleWebSocketMessage(event);
     };
 
@@ -35,19 +31,16 @@ const useNotificationsCounter = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const updatedDonutsEaten = notificationCount;
-  //   const updatedUserData = { ...user, donutsEaten: updatedDonutsEaten };
-
-  //   dispatch(setUserData(updatedUserData));
-  // }, [notificationCount, user, dispatch]);
-
   useEffect(() => {
-    console.log(user.donutsEaten);
-    const updatedDonutsEaten = user.donutsEaten;
-    console.log(updatedDonutsEaten);
-    setNotificationCount(updatedDonutsEaten);
-  }, [user.donutsEaten]);
+    setNotificationCount(user.donutsEaten);
+  }, [notificationCount, user, dispatch]);
+
+  // useEffect(() => {
+  //   console.log(user.donutsEaten);
+  //   const updatedDonutsEaten = user.donutsEaten;
+  //   console.log(updatedDonutsEaten);
+  //   setNotificationCount(updatedDonutsEaten);
+  // }, [user.donutsEaten]);
 
   return notificationCount;
 };

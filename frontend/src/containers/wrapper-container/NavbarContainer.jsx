@@ -24,12 +24,12 @@ const NavbarContainer = () => {
     user.donutsEaten
   );
   const { logout, isAuthenticated, isLoading } = useAuth0();
-  const notificationCount = useNotificationsCounter();
+  // const notificationCount = useNotificationsCounter();
 
-  useEffect(() => {
-    console.log("co jest");
-    setNotificationsCount(notificationCount);
-  }, [notificationCount]);
+  // useEffect(() => {
+  //   console.log("co jest");
+  //   setNotificationsCount(notificationCount);
+  // }, [notificationCount]);
 
   useEffect(() => {
     setNotificationsCount(user.donutsEaten);
@@ -99,7 +99,7 @@ const NavbarContainer = () => {
               <Badge
                 color="error"
                 // badgeContent={user.donutsEaten}
-                badgeContent={notificationCount}
+                badgeContent={notificationsCount}
                 onClick={handleNavigate("/notifications")}
               >
                 <IconButton color="secondary">

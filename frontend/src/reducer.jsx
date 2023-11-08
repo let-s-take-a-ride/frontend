@@ -18,14 +18,14 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUserData(state, action) {
-      const { id, city, picture, username, email, donutsEaten } =
+      const { id, city, picture, username, email, notifications_count } =
         action.payload;
       state.id = id;
       state.city = city;
       state.picture = picture;
       state.username = username;
       state.email = email;
-      state.donutsEaten = donutsEaten;
+      state.donutsEaten = notifications_count;
     },
     decrementDonutsEaten(state) {
       if (state.donutsEaten > 0) {
