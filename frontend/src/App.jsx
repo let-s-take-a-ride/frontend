@@ -14,6 +14,7 @@ import EventList from "./containers/rides-page/RidesPage2";
 import EventDetailPage from "./containers/rides-page/EventDetailPage";
 import MyRidesPage from "./containers/myRides-page/MyRidesPage";
 import CreateRidePage from "./containers/createRide-page/CreateRidePage";
+import NotificationDetailsPage from "./containers/notifications-page/NotificationDetailsPage";
 
 function App() {
   return (
@@ -84,6 +85,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <NotificationsPage />
+                  </ProtectedRoute>
+                }
+              />{" "}
+              <Route
+                path="/notifications/:notificationId"
+                element={
+                  <ProtectedRoute>
+                    <NotificationDetailsPage />
                   </ProtectedRoute>
                 }
               />{" "}

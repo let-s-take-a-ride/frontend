@@ -27,8 +27,19 @@ const userSlice = createSlice({
       state.email = email;
       state.donutsEaten = donutsEaten;
     },
+    decrementDonutsEaten(state) {
+      if (state.donutsEaten > 0) {
+        state.donutsEaten -= 1;
+      } else {
+        state.donutsEaten = 0;
+      }
+    },
+    incrementDonutsEaten(state) {
+      state.donutsEaten += 1;
+    },
   },
 });
 
-export const { setUserData } = userSlice.actions;
+export const { setUserData, decrementDonutsEaten, incrementDonutsEaten } =
+  userSlice.actions;
 export default userSlice.reducer;

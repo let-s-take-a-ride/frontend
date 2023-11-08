@@ -17,16 +17,24 @@ import { getUserDataFromLocalStorage } from "../../services/localStorageService"
 import useNotificationsCounter from "../../hooks/useNotificationsCounter";
 const NavbarContainer = () => {
   const navigate = useNavigate();
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [notificationsCount, setNotificationsCount] = useState(5);
-  const { logout, isAuthenticated, isLoading } = useAuth0();
   const user = useSelector((state) => state.user);
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [notificationsCount, setNotificationsCount] = useState(
+    user.donutsEaten
+  );
+  const { logout, isAuthenticated, isLoading } = useAuth0();
   const notificationCount = useNotificationsCounter();
 
   useEffect(() => {
     console.log("co jest");
     setNotificationsCount(notificationCount);
   }, [notificationCount]);
+
+  useEffect(() => {
+    setNotificationsCount(user.donutsEaten);
+    console.log(user.donutsEaten);
+  }, [user.donutsEaten]);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -52,6 +60,7 @@ const NavbarContainer = () => {
         onClick={toggleDrawer(true)}
       >
         <Badge color="error" badgeContent={notificationsCount}>
+          {/* <Badge color="error" badgeContent={user.donutsEaten}> */}
           <MenuIcon />
         </Badge>
       </IconButton>
@@ -89,7 +98,8 @@ const NavbarContainer = () => {
               </IconButton>
               <Badge
                 color="error"
-                badgeContent={notificationsCount}
+                // badgeContent={user.donutsEaten}
+                badgeContent={notificationCount}
                 onClick={handleNavigate("/notifications")}
               >
                 <IconButton color="secondary">
@@ -106,6 +116,12 @@ const NavbarContainer = () => {
                 <Settings />
               </IconButton>
             </Box>
+          </ListItem>
+          <ListItem
+            onClick={handleNavigate("/create-ride")}
+            sx={navbarStyles.listItem}
+          >
+            Create Ride{" "}
           </ListItem>
           <ListItem
             onClick={handleNavigate("/rides")}

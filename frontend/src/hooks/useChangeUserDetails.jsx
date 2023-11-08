@@ -2,7 +2,7 @@ import React from "react";
 import { getAxiosInstance } from "../services/axiosInstance";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import { setUserData } from "../reducer";
 import { clearUserDataFromLocalStorage } from "../services/localStorageService";
 const useChangeUserDetails = () => {
