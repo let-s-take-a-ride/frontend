@@ -2,7 +2,7 @@ import React from "react";
 import { getAxiosInstance } from "../services/axiosInstance";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { setUserData } from "../reducer";
 import { clearUserDataFromLocalStorage } from "../services/localStorageService";
 const useChangeUserDetails = () => {
@@ -21,6 +21,7 @@ const useChangeUserDetails = () => {
       updatedData.append("preferences.distance", formData.distance);
       updatedData.append("preferences.average", formData.average);
       updatedData.append("preferences.city", formData.city);
+      updatedData.append("first_login", false);
 
       try {
         const axiosInstance = await getAxiosInstance(getAccessTokenSilently);
@@ -41,6 +42,8 @@ const useChangeUserDetails = () => {
   const validate = (formData) => {
     let tempErrors = {};
     tempErrors.nickname = formData.nickname ? "" : "Name is required.";
+    tempErrors.distance =
+      formData.distance > 0 ? "" : "Distance must be a positive number.";
     tempErrors.average =
       formData.average >= 15 && formData.average <= 50
         ? ""

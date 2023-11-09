@@ -5,7 +5,6 @@ import { Box } from "@mui/material";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { Link } from "react-router-dom";
-import Notifications from "../../components/NotificationsSocket";
 import useNotifications from "../../hooks/useNotifications";
 import CustomLoader from "../../components/CustomLoader";
 import Header from "../../components/Header";

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getAxiosInstance } from "../../services/axiosInstance";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button, Paper, Box } from "@mui/material";
@@ -9,6 +9,8 @@ import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import PeopleIcon from "@mui/icons-material/People";
 import Header from "../../components/Header";
 import CustomSnackbar from "../../components/CustomSnackbar";
+import { ArrowBack } from "@mui/icons-material";
+
 const EventDetailPage = () => {
   const { rideId } = useParams();
   const [eventDetails, setEventDetails] = useState(null);
@@ -105,6 +107,21 @@ const EventDetailPage = () => {
         />
 
         <Header title="Ride details" />
+        <Link to="/rides" style={{ width: "100%", textDecoration: "none" }}>
+          <Button
+            variant="outlined"
+            color="secondary"
+            startIcon={<ArrowBack />}
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "start",
+              mb: "20px",
+            }}
+          >
+            Back
+          </Button>
+        </Link>
 
         {eventDetails ? (
           <>
