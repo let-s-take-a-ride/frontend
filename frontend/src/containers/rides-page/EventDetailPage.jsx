@@ -10,6 +10,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import Header from "../../components/Header";
 import CustomSnackbar from "../../components/CustomSnackbar";
 import { ArrowBack } from "@mui/icons-material";
+import CustomLoader from "../../components/CustomLoader";
 
 const EventDetailPage = () => {
   const { rideId } = useParams();
@@ -87,6 +88,9 @@ const EventDetailPage = () => {
     setOpen(false);
   };
 
+  if (!eventDetails) {
+    return <CustomLoader />;
+  }
   return (
     <>
       <Box

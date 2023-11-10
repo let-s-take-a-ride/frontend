@@ -25,7 +25,9 @@ const userSlice = createSlice({
       state.picture = picture;
       state.username = username;
       state.email = email;
-      state.donutsEaten = notifications_count;
+      state.donutsEaten = Number.isFinite(notifications_count)
+        ? notifications_count
+        : 0;
     },
     decrementDonutsEaten(state) {
       if (state.donutsEaten > 0) {

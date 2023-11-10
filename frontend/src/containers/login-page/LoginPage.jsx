@@ -1,52 +1,34 @@
 import React from "react";
 import LoginButton from "../../components/LoginButton";
-import { styled } from "@mui/system";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-
-const Background = styled("div")({
-  backgroundImage: `url("/logo1.jpg")`,
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center center",
-  backgroundSize: "cover",
-  height: "100vh",
-  width: "100%",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  position: "relative",
-});
-
-const ContentContainer = styled(Paper)({
-  background: "rgba(0, 0, 0, 0.7)",
-  borderRadius: "10px",
-  padding: "10px 20px",
-  textAlign: "center",
-  position: "relative",
-  top: "20vh",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-});
-
-
-const Title = styled(Typography)({
-  fontSize: "2rem",
-  // fontFamily: "cursive",
-  color: "white",
-  marginBottom: "300px",
-});
+import CustomLoader from "../../components/CustomLoader";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Box } from "@mui/material";
+import Header from "../../components/Header";
 
 const LoginPage = () => {
-  return (
-    <Background>
-      <Title variant="h2">Let's take a ride!</Title>
+  const { isLoading } = useAuth0();
 
-      <ContentContainer>
+  if (isLoading) {
+    return <CustomLoader />;
+  }
+  return (
+    <>
+      {/* <Title variant="h2">Let's take a ride!</Title> */}
+      {/* <ContentContainer> */}
+      <Box
+        sx={{
+          width: "250px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Header title="Let's take a ride!" />
         <LoginButton />
-      </ContentContainer>
-    </Background>
+      </Box>
+      {/* </ContentContainer> */}
+    </>
   );
 };
 

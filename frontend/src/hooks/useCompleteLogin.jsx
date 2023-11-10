@@ -9,6 +9,9 @@ const useCompleteLogin = () => {
   const [speed, setSpeed] = useState("");
   const [city, setCity] = useState("");
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [response, setResponse] = useState(null);
+  const [error, setError] = useState(null);
 
   const validate = () => {
     let tempErrors = {};
@@ -25,8 +28,9 @@ const useCompleteLogin = () => {
 
   const handleSubmit = async () => {
     if (validate()) {
-      console.log("All fields are valid");
-      const userId = 2;
+      setIsLoading(true);
+      setResponse(null);
+      setError(null);
       const updatedData = {
         first_login: false,
         preferences: {
@@ -43,7 +47,7 @@ const useCompleteLogin = () => {
           `users/${userData.id}/`,
           updatedData
         );
-        console.log(response);
+        setResponse(response.data);
         setCity("");
         setDistance("");
         setSpeed("");
@@ -52,6 +56,9 @@ const useCompleteLogin = () => {
           "Error:",
           error.response ? error.response.data : error.message
         );
+        setError(error.response ? error.response.data : error.message);
+      } finally {
+        setIsLoading(false);
       }
     } else {
       console.log("There are errors");
@@ -67,6 +74,9 @@ const useCompleteLogin = () => {
     setCity,
     errors,
     handleSubmit,
+    isLoading,
+    response,
+    error,
   };
 };
 

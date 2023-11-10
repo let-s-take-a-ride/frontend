@@ -6,11 +6,14 @@ import { useParams, Link } from "react-router-dom";
 import useReadNotification from "../../hooks/useReadNotification";
 import Header from "../../components/Header";
 import { ArrowBack } from "@mui/icons-material";
+import CustomLoader from "../../components/CustomLoader";
 
 const NotificationDetailsPage = () => {
   const { notificationId } = useParams();
-  const { notificationDetails } = useReadNotification(notificationId);
+  const { notificationDetails, isLoading } =
+    useReadNotification(notificationId);
 
+  if (isLoading) return <CustomLoader />;
   return (
     <>
       <Box

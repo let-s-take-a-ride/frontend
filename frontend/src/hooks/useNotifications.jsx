@@ -15,7 +15,11 @@ const useNotifications = () => {
     const fetchData = async () => {
       try {
         const axiosInstance = await getAxiosInstance(getAccessTokenSilently);
-        const response = await axiosInstance.get(`notifications/?search=${id}`);
+        // const response = await axiosInstance.get(`notifications/?search=${id}`);
+        const response = await axiosInstance.get(
+          `notifications/user-notifications/${id}`
+        );
+
         setNotifications(response.data);
       } catch (error) {
         console.error(error);

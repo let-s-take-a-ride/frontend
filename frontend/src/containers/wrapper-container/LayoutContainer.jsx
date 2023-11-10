@@ -10,8 +10,8 @@ import useNotificationsCounter from "../../hooks/useNotificationsCounter";
 // import Navbar from "./Navbar";
 
 const LayoutContainer = ({ children }) => {
-  const notificationCount = useNotificationsCounter();
-  console.log("notifications count w layout: " + notificationCount);
+  // const notificationCount = useNotificationsCounter();
+  // console.log("notifications count w layout: " + notificationCount);
   return (
     <>
       <CssBaseline />

@@ -15,9 +15,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDataFromLocalStorage } from "../../services/localStorageService";
 import useNotificationsCounter from "../../hooks/useNotificationsCounter";
+import { clearUserDataFromLocalStorage } from "../../services/localStorageService";
+import { setUserData } from "../../reducer";
 const NavbarContainer = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [notificationsCount, setNotificationsCount] = useState(
@@ -135,8 +138,30 @@ const NavbarContainer = () => {
           >
             My Rides{" "}
           </ListItem>
-          <ListItem
+          {/* <ListItem
             onClick={() => logout({ returnTo: window.location.origin })}
+            sx={navbarStyles.listItem}
+          >
+            Logout
+          </ListItem> */}
+          <ListItem
+            onClick={() => {
+              // Perform immediate cleanup
+              clearUserDataFromLocalStorage();
+              dispatch(
+                setUserData({
+                  id: "",
+                  city: "",
+                  profile: "",
+                  username: "",
+                  email: "",
+                  donutsEaten: 0,
+                })
+              );
+
+              // Then logout
+              logout({ returnTo: window.location.origin });
+            }}
             sx={navbarStyles.listItem}
           >
             Logout

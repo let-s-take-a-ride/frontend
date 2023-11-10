@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import { Box, TextField, Button } from "@mui/material";
 import useCompleteLogin from "../../hooks/useCompleteLogin";
+import CustomLoader from "../../components/CustomLoader";
+import CustomSnackbar from "../../components/CustomSnackbar";
+import { useNavigate } from "react-router-dom";
 
 const CompleteLoginPage = () => {
   const {
@@ -13,7 +16,40 @@ const CompleteLoginPage = () => {
     setCity,
     errors,
     handleSubmit,
+    isLoading,
+    response,
+    error,
   } = useCompleteLogin();
+  const navigate = useNavigate();
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  const openSnackbar = (message) => {
+    setSnackbarMessage(message);
+    setSnackbarOpen(true);
+  };
+
+  const closeSnackbar = () => {
+    navigate("/");
+    setSnackbarOpen(false);
+  };
+
+  useEffect(() => {
+    if (response) {
+      openSnackbar("Data submitted successfully!");
+    }
+  }, [response]);
+
+  useEffect(() => {
+    if (error) {
+      openSnackbar(JSON.stringify(error.status));
+    }
+  }, [error]);
+
+  if (isLoading) {
+    return <CustomLoader />;
+  }
 
   return (
     <>
@@ -26,6 +62,12 @@ const CompleteLoginPage = () => {
           alignItems: "center",
         }}
       >
+        <CustomSnackbar
+          open={snackbarOpen}
+          message={snackbarMessage}
+          onClose={closeSnackbar}
+        />
+
         <Header title="complete login" />
         <TextField
           label="Average distance"

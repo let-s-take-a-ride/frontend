@@ -1,46 +1,41 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { getAxiosInstance } from "../services/axiosInstance";
-import { useAuth0 } from "@auth0/auth0-react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { decrementDonutsEaten } from "../reducer";
+import { getAxiosInstance } from "../services/axiosInstance";
+import { useAuth0 } from "@auth0/auth0-react";
+
 const useReadNotification = () => {
   const { notificationId } = useParams();
   const dispatch = useDispatch();
-
   const { getAccessTokenSilently } = useAuth0();
-  const [notificationDetails, setNotificationDetails] = useState([]);
+  const [notificationDetails, setNotificationDetails] = useState(null);
   const [isLoading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  console.log(notificationId + " w use read notification");
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    const fetchData = async () => {
+    const markNotificationAsRead = async () => {
       try {
         const axiosInstance = await getAxiosInstance(getAccessTokenSilently);
-        const response = await axiosInstance.get(
-          `notifications/${notificationId}`
-        );
+        const response = await axiosInstance.patch(`notifications/${notificationId}/`, {
+          is_read: true,
+        });
         setNotificationDetails(response.data);
-        try {
-          await axiosInstance.patch(`notifications/${notificationId}/`, {
-            is_read: true,
-          });
-          dispatch(decrementDonutsEaten());
-        } catch (error) {
-          setError(error);
-        }
+        dispatch(decrementDonutsEaten());
       } catch (error) {
-        console.error(error);
+        console.error('Error reading notification:', error);
         setError(error);
       } finally {
         setLoading(false);
       }
     };
-    fetchData();
-  }, [notificationId]);
 
-  return { isLoading, setLoading, notificationDetails, error };
+    if (notificationId) {
+      markNotificationAsRead();
+    }
+  }, [notificationId, getAccessTokenSilently, dispatch]);
+
+  return { isLoading, notificationDetails, error };
 };
 
 export default useReadNotification;
