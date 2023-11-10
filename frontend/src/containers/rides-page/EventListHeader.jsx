@@ -31,7 +31,7 @@ const EventListHeader = ({ setSearchQuery, setOrder, onCreate }) => {
             <MenuItem value="-date">Date (Descending)</MenuItem>
           </TextField>
         </Grid>
-        <Grid item xs={12} sm={4} md={2}>
+        {/* <Grid item xs={12} sm={4} md={2}>
           <Button
             variant="contained"
             color="primary"
@@ -41,7 +41,7 @@ const EventListHeader = ({ setSearchQuery, setOrder, onCreate }) => {
           >
             Create Event
           </Button>
-        </Grid>
+        </Grid> */}
       </Grid>
     </Box>
   );

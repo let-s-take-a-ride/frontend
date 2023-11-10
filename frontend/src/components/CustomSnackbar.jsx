@@ -3,7 +3,7 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
 
-function CustomSnackbar({ open, message, onClose }) {
+const CustomSnackbar = ({ open, message, onClose }) => {
   return (
     <>
       <Snackbar
@@ -24,6 +24,6 @@ function CustomSnackbar({ open, message, onClose }) {
       />
     </>
   );
-}
+};
 
 export default CustomSnackbar;

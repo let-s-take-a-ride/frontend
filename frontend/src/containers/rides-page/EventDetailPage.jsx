@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getAxiosInstance } from "../../services/axiosInstance";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button, Paper, Box } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Typography, Avatar } from "@mui/material";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import PeopleIcon from "@mui/icons-material/People";
 import Header from "../../components/Header";
 import CustomSnackbar from "../../components/CustomSnackbar";
+import { ArrowBack } from "@mui/icons-material";
+import CustomLoader from "../../components/CustomLoader";
+
 const EventDetailPage = () => {
-  const { rideId } = useParams(); // Get the ride ID from the route parameters
+  const { rideId } = useParams();
   const [eventDetails, setEventDetails] = useState(null);
   const [isUserAMember, setIsUserAMember] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
@@ -23,7 +26,6 @@ const EventDetailPage = () => {
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {
-        // Assuming you're using the getAxiosInstance and getAccessTokenSilently like in your given code
         const axiosInstance = await getAxiosInstance(getAccessTokenSilently);
         const response = await axiosInstance.get(`events/${rideId}`);
         setEventDetails(response.data);
@@ -86,6 +88,9 @@ const EventDetailPage = () => {
     setOpen(false);
   };
 
+  if (!eventDetails) {
+    return <CustomLoader />;
+  }
   return (
     <>
       <Box
@@ -106,6 +111,21 @@ const EventDetailPage = () => {
         />
 
         <Header title="Ride details" />
+        <Link to="/rides" style={{ width: "100%", textDecoration: "none" }}>
+          <Button
+            variant="outlined"
+            color="secondary"
+            startIcon={<ArrowBack />}
+            sx={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "start",
+              mb: "20px",
+            }}
+          >
+            Back
+          </Button>
+        </Link>
 
         {eventDetails ? (
           <>

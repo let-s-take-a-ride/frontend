@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Drawer from "@mui/material/Drawer";
 import Badge from "@mui/material/Badge";
@@ -14,13 +14,30 @@ import { Typography, Avatar } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDataFromLocalStorage } from "../../services/localStorageService";
-
+import useNotificationsCounter from "../../hooks/useNotificationsCounter";
+import { clearUserDataFromLocalStorage } from "../../services/localStorageService";
+import { setUserData } from "../../reducer";
 const NavbarContainer = () => {
   const navigate = useNavigate();
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [notificationsCount, setNotificationsCount] = useState(5);
-  const { logout } = useAuth0();
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [notificationsCount, setNotificationsCount] = useState(
+    user.donutsEaten
+  );
+  const { logout, isAuthenticated, isLoading } = useAuth0();
+  // const notificationCount = useNotificationsCounter();
+
+  // useEffect(() => {
+  //   console.log("co jest");
+  //   setNotificationsCount(notificationCount);
+  // }, [notificationCount]);
+
+  useEffect(() => {
+    setNotificationsCount(user.donutsEaten);
+    console.log(user.donutsEaten);
+  }, [user.donutsEaten]);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -46,6 +63,7 @@ const NavbarContainer = () => {
         onClick={toggleDrawer(true)}
       >
         <Badge color="error" badgeContent={notificationsCount}>
+          {/* <Badge color="error" badgeContent={user.donutsEaten}> */}
           <MenuIcon />
         </Badge>
       </IconButton>
@@ -83,6 +101,7 @@ const NavbarContainer = () => {
               </IconButton>
               <Badge
                 color="error"
+                // badgeContent={user.donutsEaten}
                 badgeContent={notificationsCount}
                 onClick={handleNavigate("/notifications")}
               >
@@ -102,6 +121,12 @@ const NavbarContainer = () => {
             </Box>
           </ListItem>
           <ListItem
+            onClick={handleNavigate("/create-ride")}
+            sx={navbarStyles.listItem}
+          >
+            Create Ride{" "}
+          </ListItem>
+          <ListItem
             onClick={handleNavigate("/rides")}
             sx={navbarStyles.listItem}
           >
@@ -113,8 +138,30 @@ const NavbarContainer = () => {
           >
             My Rides{" "}
           </ListItem>
-          <ListItem
+          {/* <ListItem
             onClick={() => logout({ returnTo: window.location.origin })}
+            sx={navbarStyles.listItem}
+          >
+            Logout
+          </ListItem> */}
+          <ListItem
+            onClick={() => {
+              // Perform immediate cleanup
+              clearUserDataFromLocalStorage();
+              dispatch(
+                setUserData({
+                  id: "",
+                  city: "",
+                  profile: "",
+                  username: "",
+                  email: "",
+                  donutsEaten: 0,
+                })
+              );
+
+              // Then logout
+              logout({ returnTo: window.location.origin });
+            }}
             sx={navbarStyles.listItem}
           >
             Logout

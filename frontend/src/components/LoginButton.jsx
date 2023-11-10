@@ -6,7 +6,8 @@ const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
   return (
     <Button
-      sx={{ marginTop: "30vh" }}
+      // sx={{ marginTop: "30vh", width: "250px" }}
+      sx={{ width: "250px" }}
       variant="outlined"
       color="secondary"
       onClick={() => {

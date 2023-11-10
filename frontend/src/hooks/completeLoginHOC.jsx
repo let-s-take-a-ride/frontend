@@ -39,7 +39,6 @@ const completeLoginHOC = (WrappedComponent) => {
               },
             }
           );
-          console.log(response.data);
           saveUserDataToLocalStorage(response.data, "is_first_login");
           if (response.data) {
             dispatch(setUserData(response.data));

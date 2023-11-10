@@ -66,7 +66,12 @@ const MyRidesPage = () => {
             value={rideView}
             exclusive
             onChange={handleRideViewChange}
-            sx={{ width: "300px", display: "flex", justifyContent: "center" }}
+            sx={{
+              width: "300px",
+              display: "flex",
+              justifyContent: "center",
+              mb: "20px",
+            }}
           >
             <ToggleButton value="attending" sx={{ width: "50%" }}>
               <Typography variant="button">Attending</Typography>

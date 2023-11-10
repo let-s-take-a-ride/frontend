@@ -14,11 +14,12 @@ const ProtectedRoute = ({ children }) => {
       clearUserDataFromLocalStorage();
       dispatch(
         setUserData({
+          id: "",
           city: "",
           profile: "",
           username: "",
           email: "",
-          donutsEaten: 0, 
+          donutsEaten: 0,
         })
       );
     }

@@ -14,94 +14,106 @@ import EventList from "./containers/rides-page/RidesPage2";
 import EventDetailPage from "./containers/rides-page/EventDetailPage";
 import MyRidesPage from "./containers/myRides-page/MyRidesPage";
 import CreateRidePage from "./containers/createRide-page/CreateRidePage";
+import NotificationDetailsPage from "./containers/notifications-page/NotificationDetailsPage";
+import { WebSocketProvider } from "./contexts/WebsocketProvider";
 
 function App() {
   return (
     <>
-      <AlertProvider>
-        <ThemeProvider theme={customTheme}>
-          <LayoutContainer>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <ProtectedRoute>
-                    <DashboardPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/about"
-                element={
-                  <ProtectedRoute>
-                    <AboutPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/settings"
-                element={
-                  <ProtectedRoute>
-                    <SettingsPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/my-rides"
-                element={
-                  <ProtectedRoute>
-                    <MyRidesPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/create-ride"
-                element={
-                  <ProtectedRoute>
-                    <CreateRidePage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/rides"
-                element={
-                  <ProtectedRoute>
-                    {/* <RidesPage /> */}
-                    <EventList />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/rides/:rideId"
-                element={
-                  <ProtectedRoute>
-                    <EventDetailPage />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/notifications"
-                element={
-                  <ProtectedRoute>
-                    <NotificationsPage />
-                  </ProtectedRoute>
-                }
-              />{" "}
-              <Route
-                path="/complete-login"
-                element={
-                  <ProtectedRoute>
-                    <CompleteLoginPage />
-                  </ProtectedRoute>
-                }
-              ></Route>
-              <Route path="/login" element={<LoginPage />} />
-              {/* Fallback route for unmatched paths ---> add handler */}
-              <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-          </LayoutContainer>
-        </ThemeProvider>
-      </AlertProvider>
+      <WebSocketProvider>
+        <AlertProvider>
+          <ThemeProvider theme={customTheme}>
+            <LayoutContainer>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <ProtectedRoute>
+                      <DashboardPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/about"
+                  element={
+                    <ProtectedRoute>
+                      <AboutPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/settings"
+                  element={
+                    <ProtectedRoute>
+                      <SettingsPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/my-rides"
+                  element={
+                    <ProtectedRoute>
+                      <MyRidesPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/create-ride"
+                  element={
+                    <ProtectedRoute>
+                      <CreateRidePage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/rides"
+                  element={
+                    <ProtectedRoute>
+                      {/* <RidesPage /> */}
+                      <EventList />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/rides/:rideId"
+                  element={
+                    <ProtectedRoute>
+                      <EventDetailPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/notifications"
+                  element={
+                    <ProtectedRoute>
+                      <NotificationsPage />
+                    </ProtectedRoute>
+                  }
+                />{" "}
+                <Route
+                  path="/notifications/:notificationId"
+                  element={
+                    <ProtectedRoute>
+                      <NotificationDetailsPage />
+                    </ProtectedRoute>
+                  }
+                />{" "}
+                <Route
+                  path="/complete-login"
+                  element={
+                    <ProtectedRoute>
+                      <CompleteLoginPage />
+                    </ProtectedRoute>
+                  }
+                ></Route>
+                <Route path="/login" element={<LoginPage />} />
+                {/* Fallback route for unmatched paths ---> add handler */}
+                <Route path="*" element={<Navigate to="/" />} />
+              </Routes>
+            </LayoutContainer>
+          </ThemeProvider>
+        </AlertProvider>
+      </WebSocketProvider>
     </>
   );
 }
