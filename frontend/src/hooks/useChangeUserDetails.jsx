@@ -56,7 +56,6 @@ const useChangeUserDetails = () => {
     errors,
     response,
     handleSubmit,
-    response,
     setResponse,
     open,
     setOpen,
