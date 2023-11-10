@@ -34,12 +34,8 @@ const EventDetailPage = () => {
           (membership) => membership.user
         );
 
-        console.log(response.data);
         setIsOwner(response.data.owner === id);
-        console.log(memberUserIds + " mem user ids");
-        console.log(id + " user");
 
-        console.log(response.data.owner === id);
 
         setIsUserAMember(memberUserIds.includes(parseInt(id)));
       } catch (error) {
