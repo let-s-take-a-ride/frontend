@@ -10,7 +10,7 @@ export default defineConfig({
     target: "node",
     noExternal: Object.keys(pkg.dependencies || {}),
     build: {
-      outDir: "dist/server",
+      outDir: "dist",
     },
     server: {
       middlewareMode: "true",
