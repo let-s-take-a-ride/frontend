@@ -11,6 +11,7 @@ export default defineConfig({
     noExternal: Object.keys(pkg.dependencies || {}),
     build: {
       outDir: "dist",
+      globals: true
     },
     server: {
       middlewareMode: "true",
