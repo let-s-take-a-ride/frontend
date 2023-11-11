@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp frontend/staticwebapp.config.json dist/",
+    "build": "vite build",
+    "postbuild": "cp staticwebapp.config.json dist/",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
