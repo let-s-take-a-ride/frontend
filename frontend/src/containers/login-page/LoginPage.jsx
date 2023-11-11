@@ -7,6 +7,9 @@ import Header from "../../components/Header";
 
 const LoginPage = () => {
   const { isLoading } = useAuth0();
+  console.log(import.meta.env.VITE_DOMAIN);
+  console.log(import.meta.env.VITE_CLIENT_ID);
+  console.log(import.meta.env.VITE_AUDIENCE);
 
   if (isLoading) {
     return <CustomLoader />;
