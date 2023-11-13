@@ -20,7 +20,7 @@ import { WebSocketProvider } from "./contexts/WebsocketProvider";
 function App() {
   return (
     <>
-      <WebSocketProvider>
+      {/* <WebSocketProvider> */}
         <AlertProvider>
           <ThemeProvider theme={customTheme}>
             <LayoutContainer>
@@ -113,7 +113,7 @@ function App() {
             </LayoutContainer>
           </ThemeProvider>
         </AlertProvider>
-      </WebSocketProvider>
+      {/* </WebSocketProvider> */}
     </>
   );
 }

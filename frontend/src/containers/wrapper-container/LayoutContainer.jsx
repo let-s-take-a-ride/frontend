@@ -6,7 +6,6 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { teal, grey } from "@mui/material/colors";
 import NavbarContainer from "./NavbarContainer";
-import useNotificationsCounter from "../../hooks/useNotificationsCounter";
 // import Navbar from "./Navbar";
 
 const LayoutContainer = ({ children }) => {
