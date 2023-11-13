@@ -11,7 +11,7 @@ const useNotificationsCounter = () => {
 
   useEffect(() => {
     const socket = new WebSocket(
-      `ws://${import.meta.env.VITE_BASE_URL}/ws/chat/user_${user.id}/`
+      `ws://${import.meta.env.VITE_BASE_URL}ws/chat/user_${user.id}/`
     );
 
     const handleWebSocketMessage = (event) => {
