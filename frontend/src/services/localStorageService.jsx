@@ -11,6 +11,5 @@ export const getUserDataFromLocalStorage = () => {
 };
 
 export const clearUserDataFromLocalStorage = () => {
-  // console.log("Clearing user data from localStorage");
   localStorage.removeItem("user");
 };
