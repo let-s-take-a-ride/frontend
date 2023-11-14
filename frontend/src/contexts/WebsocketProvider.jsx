@@ -16,10 +16,12 @@ export const WebSocketProvider = ({ children }) => {
 
   const connectWebSocket = () => {
     if (user && user.id) {
-      console.log("this is user id " + user.id);
       // const ws = new WebSocket(`ws://localhost:8000/ws/chat/user_${user.id}/`);
-      const ws = new WebSocket(`wss://${import.meta.env.VITE_BASE_URL}ws/chat/user_${user.id}/`);
-      
+      const domain = import.meta.env.VITE_BASE_URL;
+      const updatedDomain = domain.substring(8);
+      const ws = new WebSocket(
+        `wss://${updatedDomain}ws/chat/user_${user.id}/`
+      );
 
       ws.onopen = () => {
         console.log("WebSocket Connected");
