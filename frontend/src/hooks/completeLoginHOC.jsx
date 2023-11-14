@@ -31,7 +31,7 @@ const completeLoginHOC = (WrappedComponent) => {
         });
         try {
           const response = await axios.post(
-            "http://localhost:8000/auth/login/",
+            `${import.meta.env.VITE_BASE_URL}auth/login/`,
             {},
             {
               headers: {

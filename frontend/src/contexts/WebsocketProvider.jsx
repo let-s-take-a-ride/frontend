@@ -18,7 +18,7 @@ export const WebSocketProvider = ({ children }) => {
     if (user && user.id) {
       console.log("this is user id " + user.id);
       // const ws = new WebSocket(`ws://localhost:8000/ws/chat/user_${user.id}/`);
-      const ws = new WebSocket(`ws://${import.meta.env.VITE_BASE_URL}ws/chat/user_${user.id}/`);
+      const ws = new WebSocket(`wss://${import.meta.env.VITE_BASE_URL}ws/chat/user_${user.id}/`);
       
 
       ws.onopen = () => {
