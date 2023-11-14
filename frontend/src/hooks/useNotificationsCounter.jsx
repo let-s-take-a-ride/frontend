@@ -10,8 +10,10 @@ const useNotificationsCounter = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const domain = import.meta.env.VITE_BASE_URL;
+    const updatedDomain = domain.substring(8);
     const socket = new WebSocket(
-      `ws://${import.meta.env.VITE_BASE_URL}ws/chat/user_${user.id}/`
+      `ws://${updatedDomain}ws/chat/user_${user.id}/`
     );
 
     const handleWebSocketMessage = (event) => {
