@@ -17,7 +17,6 @@ const NotificationsPage = () => {
     return <CustomLoader />;
   }
 
-  console.log(notifications);
   return (
     <>
       <Box

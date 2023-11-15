@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getUserDataFromLocalStorage } from "./services/localStorageService";
 
 const savedUserData = getUserDataFromLocalStorage();
-// console.log(savedUserData);
 
 const initialState = savedUserData || {
   id: "",

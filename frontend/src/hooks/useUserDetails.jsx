@@ -15,7 +15,6 @@ const useUserDetails = () => {
       try {
         const axiosInstance = await getAxiosInstance(getAccessTokenSilently);
         const response = await axiosInstance.get(`/users/${id}/`);
-        console.log(response.data);
         setUserDetails(response.data);
         setLoading(false);
       } catch (error) {

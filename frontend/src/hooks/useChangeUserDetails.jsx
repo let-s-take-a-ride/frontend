@@ -15,7 +15,6 @@ const useChangeUserDetails = () => {
   // const [formData, setFormData] = useState({});
 
   const handleSubmit = async (formData) => {
-    console.log(formData);
     if (validate(formData)) {
       updatedData.append("nickname", formData.nickname);
       updatedData.append("preferences.distance", formData.distance);
@@ -29,7 +28,6 @@ const useChangeUserDetails = () => {
           `/users/${id}/`,
           updatedData
         );
-        console.log(response);
         setResponse("Successfully updated!");
       } catch (error) {
         setResponse("Something went wrong :(");

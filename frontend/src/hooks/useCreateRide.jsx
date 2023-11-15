@@ -67,8 +67,6 @@ const useCreateRide = () => {
 
   const handleSubmit = async () => {
     if (validate()) {
-      console.log("All fields are valid");
-      console.log(formData.date);
       updatedData.append("name", formData.name);
       updatedData.append("description", formData.description);
       updatedData.append("owner", formData.owner);
@@ -84,13 +82,10 @@ const useCreateRide = () => {
         updatedData.append("gpx_track", formData.gpx_track);
       }
 
-      console.log(updatedData);
       try {
         const userData = getUserDataFromLocalStorage();
-        console.log(userData);
         const axiosInstance = await getAxiosInstance(getAccessTokenSilently);
         const response = await axiosInstance.post(`events/`, updatedData);
-        console.log(response);
         setFormData({
           name: "",
           description: "",

@@ -21,7 +21,6 @@ const useEvents = () => {
           search: searchQuery,
         };
         const response = await axiosInstance.get("events/", { params });
-        console.log(response.data);
         setEvents(response.data);
       } catch (error) {
         setError(error);

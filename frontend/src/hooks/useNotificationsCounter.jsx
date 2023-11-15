@@ -17,14 +17,11 @@ const useNotificationsCounter = () => {
     );
 
     const handleWebSocketMessage = (event) => {
-      console.log(event);
       const message = JSON.parse(event.data);
-      console.log(message);
       dispatch(incrementDonutsEaten());
     };
 
     socket.onmessage = (event) => {
-      console.log("przyszla message");
       handleWebSocketMessage(event);
     };
 

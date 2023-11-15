@@ -30,7 +30,6 @@ export const WebSocketProvider = ({ children }) => {
 
       ws.onmessage = (event) => {
         const message = JSON.parse(event.data);
-        console.log("Received message:", message);
         dispatch(incrementDonutsEaten());
       };
 

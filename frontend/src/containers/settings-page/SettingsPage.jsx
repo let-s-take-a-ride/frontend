@@ -36,7 +36,6 @@ const SettingsPage = () => {
   const { userDetails, isLoading } = useUserDetails();
   const { values, handleChange } = useForm(userDetails);
   const handleEditIcon = () => {
-    console.log("clicked");
     openSnackbar("Successfully updated");
   };
 
