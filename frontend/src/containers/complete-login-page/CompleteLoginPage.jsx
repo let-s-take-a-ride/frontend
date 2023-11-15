@@ -72,6 +72,7 @@ const CompleteLoginPage = () => {
         <TextField
           label="Average distance"
           variant="outlined"
+          type="number"
           fullWidth
           required
           margin="normal"
@@ -86,6 +87,7 @@ const CompleteLoginPage = () => {
           variant="outlined"
           fullWidth
           required
+          type="number"
           margin="normal"
           color="secondary"
           value={speed}
